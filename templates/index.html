@@ -36,7 +36,7 @@
               <div>
                 <form class="" action="index.html" method="post">
                   <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
-                  <div class="borderc center" style="background: red; width: 30vw; height: 12vh; overflow: hidden;vertical-align: middle;">
+                  <div class="borderh center" style="background: red; width: 28vw; height: 12vh; overflow: hidden;vertical-align: middle;">
                     <input style="width: 45vw; max-width: 45vw; object-fit: cover;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
                   </div>
                 </form>
@@ -53,15 +53,15 @@
         <div class="parent">
           {% for item in folder %}
           {% if (link == 'months') or (link == 'days') or (link == 'files') %}
-          <div class="boxs center">
+          <div class="box center">
             <div class="img-block">
               <span class="img-title"><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
               {% if link == 'months' %}
-              <img class="img-img" src="static/images/folder.svg" />
+              <img style="max-width: 200px;" class="img-img" src="static/images/folder.svg" />
               {% elif link == 'days' %}
-              <img class="img-img" src="static/images/folderm.svg" />
+              <img style="max-width: 200px;" class="img-img" src="static/images/folderm.svg" />
               {% elif link == 'files' %}
-              <img class="img-img" src="static/images/folderd.svg" />
+              <img style="max-width: 200px;" class="img-img" src="static/images/folderd.svg" />
               {% endif %}
             </div>
           </div>
