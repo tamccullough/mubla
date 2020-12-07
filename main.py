@@ -157,7 +157,7 @@ def view():
         ## testing above
         #return send_file(directory+filename, cache_timeout=0)
 
-db.init_app(mubla)
+#db.init_app(mubla)
 
 if __name__ == "__main__":
     mubla.run()
