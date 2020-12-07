@@ -7,7 +7,7 @@ Personally, I have my files stored on an SSD(with multiple backups) so that I ca
 
 Originally we were using some third party apps to browse our photo/video library, but I didn't fully trust what those apps may have been accessing.
 
-SO I made Mubla.
+So I made Mubla.
 
 ### Setup
 
