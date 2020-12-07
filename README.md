@@ -1,5 +1,5 @@
 ## Mubla
-### photo album
+### Raison d'être
 
 None of us should be storing our photos and videos in the cloud. Or atleast we should avoid it as much as possible.
 
@@ -49,6 +49,8 @@ so, for example;
         - video 1
       
 I would recommend you organize your photos/videos in the same manner to use this flask app without problems.
+
+### Running the App
 
 - clone this repository
 - change the path in the main.py file to your photos path
