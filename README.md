@@ -60,3 +60,7 @@ I would recommend you organize your photos/videos in the same manner to use this
 ### Success
 
 If set up as detailed above, you will be able to access the files almost any browser at ipaddressofapp:5000/
+
+### Note
+
+after every directory or file change the flask app would need to be restarted. This could be setup as a cron job on a linux box.
