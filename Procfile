@@ -1,1 +1,1 @@
-web: gunicorn main:couch
+web: gunicorn main:mubla
