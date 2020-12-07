@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- !PAGE CONTENT! -->
+<!-- app display -->
+<div class="container">
+  <div class="spacer"></div>
+  <h1 class="center">{{ location }}</h1>
+  {% if (link == 'days') or (link == 'files') or (link == 'view') %}
+  <h3 class="center" style="width:40%;"><a class="text-white button" href="javascript:window.history.back();">back</a></h3>
+  {% else %}
+  <a></a>
+  {% endif %}
+  <div class="spacer"></div>
+  <div class="page80">
+    <div class="spacer"></div>
+    <div class="mobile" style="min-height:70vh;">
+      <form method="post" action="/{{ link }}">
+        <div class="parent">
+          {% for item in folder %}
+          {% if (link == 'months') or (link == 'days') or (link == 'files') %}
+          <div class="boxs center">
+            <div class="img-block">
+              <span class="img-title"><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
+              {% if link == 'months' %}
+              <img class="img-img" src="static/images/folder.svg" />
+              {% elif link == 'days' %}
+              <img class="img-img" src="static/images/folderm.svg" />
+              {% elif link == 'files' %}
+              <img class="img-img" src="static/images/folderd.svg" />
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          <div class="boxs center">
+            <div>
+              <div>
+                <form class="" action="index.html" method="post">
+                  <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
+                  <div class="borderc center" style="background: red; width: 30vw; height: 12vh; overflow: hidden;vertical-align: middle;">
+                    <input style="width: 45vw; max-width: 45vw; object-fit: cover;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor%}
+        </div>
+      </form>
+    </div>
+    <div class="desktop" style="min-height:70vh;">
+      <form method="post" action="/{{ link }}">
+        <div class="parent">
+          {% for item in folder %}
+          {% if (link == 'months') or (link == 'days') or (link == 'files') %}
+          <div class="boxs center">
+            <div class="img-block">
+              <span class="img-title"><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
+              {% if link == 'months' %}
+              <img class="img-img" src="static/images/folder.svg" />
+              {% elif link == 'days' %}
+              <img class="img-img" src="static/images/folderm.svg" />
+              {% elif link == 'files' %}
+              <img class="img-img" src="static/images/folderd.svg" />
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          <div class="box center">
+            <div>
+              <div>
+                <form class="" action="index.html" method="post">
+                  <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
+                  <div class="borderc center" style="background: red; width: 15vw; height:15vh; overflow: hidden; align-content: center;">
+                    <input style="width: 20vw; object-fit: cover;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor%}
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endblock %}

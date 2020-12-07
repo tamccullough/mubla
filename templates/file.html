@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="spacer"></div>
+  <h1 class="center">{{ location }}</h1>
+  <h3 class="center"><a class="text-white button" href="javascript:window.history.back();">back</a></h3>
+  <div class="spacer"></div>
+  <div class="page80 center">
+    {% if check == 'img' %}
+    {% if size == 'wide' %}
+    <img style="width:100%;" src='static/images/served/out{{query}}.jpg'>
+    {% else %}
+    <img style="height:80vh;" src='static/images/served/out{{query}}.jpg'>
+    {% endif %}
+    {% else %}
+    {% if size == 'wide' %}
+    <video controls width="100%"><source src="static/images/served/out{{query}}.mp4" type="video/mp4">
+      {% else %}
+      <video controls height="80vh"><source src="static/images/served/out{{query}}.mp4" type="video/mp4">
+        {% endif %}
+        {% endif %}
+      </div>
+      {% endblock %}
