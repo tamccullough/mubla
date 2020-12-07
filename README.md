@@ -9,7 +9,7 @@ Originally we were using some third party apps to browse our photo/video library
 
 SO I made Mubla.
 
-## Setup
+### Setup
 
 ** This has been made using Linux, so you may need to add some extra code to run it on Windows or Mac **
 
