@@ -56,3 +56,7 @@ I would recommend you organize your photos/videos in the same manner to use this
 - change the path in the main.py file to your photos path
 - setup the virtual environment
 - use the command > flask run --host=0.0.0.0 (withrout the host argument it will only be available on the local machine)
+
+### Success
+
+If set up as detailed above, you will be able to access the files almost any browser at https://ipaddressofapp:5000/
