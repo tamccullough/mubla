@@ -17,7 +17,7 @@ from os.path import isfile, join
 import pandas as pd
 import re
 
-root_folder = '/your/photos/path/'
+root_folder = '/media/todd/photos'
 directory = root_folder
 
 def clean_thumbs():
@@ -64,18 +64,6 @@ def month():
     months = [x for x in directories[directories['year'] == year]['month'].unique() if x[0] != '.']
     months = [x for x in months if (x[0] != '.') | (x[:1] != 'mt')]
     months = sorted(months)
-    if (len(months) == 1) & (months[0][-4:] == 'jpg/'):
-        filename = months[0][:-1]
-        if (filename[-3:].lower() == 'jpg') | (filename[-3:].lower() == 'jpeg'):
-            #img = ipl.open(directory)
-            img = mub.image_open(directory+filename)
-            image_scaled = mub.image_resize(img,value=3,scale=0)
-            image_scaled.save('out.jpg',quality=100)
-            return send_file('out.jpg', cache_timeout=0)
-            #return send_file(directory+filename, cache_timeout=0)
-        else:
-            return send_file(directory+filename, cache_timeout=0)
-
     return render_template('index.html',
     link = 'days', location = year[:-1],
     home = 'mubla', ext = '.jpg', folder = months,
@@ -88,17 +76,6 @@ def day():
     days = directories[(directories['year'] == year) & (directories['month'] == month)]['day'].unique()
     days = [x for x in days if (x[0] != '.') | (x[:1] != 'mt')]
     days = sorted(days)
-    if (len(days) == 1) & (days[0][-4:] == 'jpg/'):
-        filename = days[0][:-1]
-        if (filename[-3:].lower() == 'jpg') | (filename[-3:].lower() == 'jpeg'):
-            #img = ipl.open(directory)
-            img = mub.image_open(directory+filename)
-            image_scaled = mub.image_resize(img,value=3,scale=0)
-            image_scaled.save('out.jpg',quality=100)
-            return send_file('out.jpg', cache_timeout=0)
-            #return send_file(directory+filename, cache_timeout=0)
-        else:
-            return send_file(directory+filename, cache_timeout=0)
     return render_template('index.html',
     link = 'files', location = month[:-1]+'-'+year[:-1],
     home = 'mubla', ext = '.jpg', folder = days,
