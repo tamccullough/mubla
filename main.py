@@ -18,9 +18,14 @@ from os.path import isfile, join
 import pandas as pd
 import re
 
-root_folder = '/your/photos/path/'
+# the root folder that Mubla will load the photos and videos from
+root_folder = '/your/photos/path'
 directory = root_folder
 
+# the following variables are used in the html section
+theme, tfont, bfont = 'mono', ['Pacifico','sans-serif'], ['Open Sans','sans-serif']
+
+# FUNCTIONS for removing the generated thumbnails and images that have been copied to the served
 def clean_thumbs():
     thumbdir = 'static/images/thumbs/'
     thumblist = [ f for f in os.listdir(thumbdir) if f.endswith('.jpg') | f.endswith('.JPG') ]
@@ -29,23 +34,24 @@ def clean_thumbs():
 
 def clean_served():
     stored = 'static/images/served/'
-    onlyfiles = [f for f in listdir(stored) if isfile(join(stored, f))]
-    print('\n',onlyfiles,'\n')
-    for f in onlyfiles:
+    servedfiles = [f for f in listdir(stored) if isfile(join(stored, f))]
+    print('\n',servedfiles,'\n')
+    for f in servedfiles:
         os.remove(os.path.join(stored, f))
 
+# CREATE a pandas DataFrame with the directory information
 all_files = mub.get_all_files(directory)
 directories = pd.DataFrame(all_files,columns=['root','year','month','day','file'])
 years = directories.year.unique()
 
+# CREATE the flask app
 mubla = Flask(__name__, instance_relative_config=True)
 mubla.config.from_mapping(
         SECRET_KEY='dev', # change to a random value later when deploying
         DATABASE=os.path.join(mubla.instance_path, 'main.sqlite'),
     )
 
-theme, tfont, bfont = 'mono', ['Pacifico','sans-serif'], ['Open Sans','sans-serif']
-
+# display the available years that are available from the first subdirectories
 @mubla.route('/')
 def index():
     clean_thumbs()
@@ -63,12 +69,13 @@ def index():
     home = 'mubla', image = 'static/images/folder.svg', folder = years,
     theme = theme,  tfont = tfont, bfont = bfont)
 
+# grab the months associated with the year that has been selected
 @mubla.route('/months', methods=['POST'])
 def month():
     global year
     year = request.form['months']+'/'
     directory = root_folder+year
-    months = [x for x in directories[directories['year'] == year]['month'].unique() if x[0] != '.']
+    months = [x for x in directories[directories['year'] == year]['month'].unique() if x[0:2].isdigit()]
     months = [x for x in months if (x[0] != '.') | (x[:1] != 'mt')]
     months = sorted(months)
     if len(months) <= 2:
@@ -82,12 +89,13 @@ def month():
     home = 'mubla', image = 'static/images/folderm.svg', folder = months,
     theme = theme,  tfont = tfont, bfont = bfont)
 
+# grab the days associated with the month that has been selected
 @mubla.route('/days', methods=['POST'])
 def day():
     global month
     month = request.form['days']+'/'
     days = directories[(directories['year'] == year) & (directories['month'] == month)]['day'].unique()
-    days = [x for x in days if (x[0] != '.') | (x[:1] != 'mt')]
+    days = [x for x in days  if x[0:2].isdigit()]
     days = sorted(days)
     if len(days) <= 2:
         placement = 'squeeze'
@@ -100,6 +108,7 @@ def day():
     home = 'mubla', image = 'static/images/folderd.svg', folder = days,
     theme = theme,  tfont = tfont, bfont = bfont)
 
+## load the files in the directory and create a thumbnail for each file
 @mubla.route('/files', methods=['POST'])
 def file():
     global day
@@ -117,6 +126,7 @@ def file():
     else:
         placement = ''
     for x in files:
+        print('\n','CHECKING ERRORS','\n',x,'\n',directory+x,'\n')
         if (x[-4:] == '.jpg') or (x[-4:] == '.JPG'):
             mub.image_thumb(directory+x)
         else:
@@ -148,8 +158,6 @@ def view():
         link = 'months', location = month[:-1]+'-'+day[:-1]+'-'+year[:-1], check = 'img', query = gen,
         home = 'mubla', ext = '.jpg', folder = years, size = size,
         theme = theme,  tfont = tfont, bfont = bfont)
-        ## testing above
-        #return send_file('static/images/served/out.jpg', cache_timeout=0)
     else:
         mub.video_copy(directory+filename,gen)
         if int(year[:-1]) < 2010:
@@ -161,8 +169,6 @@ def view():
         link = 'months', location = month[:-1]+'-'+day[:-1]+'-'+year[:-1], check = 'video', query = gen,
         home = 'mubla', ext = '.jpg', folder = years, size = 'wide',
         theme = theme,  tfont = tfont, bfont = bfont)
-        ## testing above
-        #return send_file(directory+filename, cache_timeout=0)
 
 #db.init_app(mubla)
 
