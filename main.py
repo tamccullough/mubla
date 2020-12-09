@@ -18,7 +18,7 @@ from os.path import isfile, join
 import pandas as pd
 import re
 
-root_folder = '/media/todd/photos/'
+root_folder = '/your/photos/path/'
 directory = root_folder
 
 def clean_thumbs():

@@ -1,135 +1,30 @@
-<!DOCTYPE html>
-<!-- Todd McCullough -->
-<html>
-<title>photo album</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="static/css/themes.css">
-<link rel="stylesheet" href="static/css/style.css">
-<link rel="stylesheet" href="static/css/nav.css">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ubuntu+Mono&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Neucha&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-<style>
-
-html,h1,h2 {
-  font-family: '{{ tfont[0] }}', '{{ tfont[1] }}';
-  font-weight: 400;
-}
-
-body,h3,h4,h5,a {
-  font-family: '{{ bfont[0] }}', '{{ bfont[1] }}';
-  font-weight: 400;
-}
-
-* {
-  scrollbar-width: auto;
-  scrollbar-color: white #47a3ff;
-}
-
-.bold {
-  font-weight: 700;
-}
-
-.coiny {
-  font-family: 'Coiny', cursive;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -3px;
-}
-
-.cursive {
-  font-family: '{{ tfont[0] }}', '{{ tfont[1] }}';
-  font-weight: 400;
-  letter-spacing: -3px;
-}
-
-.input-l {
-  font-size: 4em;
-  background: none;
-  border: none;
-  width: 80%;
-  height: 80%;
-  cursor: pointer;
-}
-
-.input-s {
-  font-size: 2.5em;
-  background: none;
-  border: none;
-  width: 80%;
-  height: 80%;
-  cursor: pointer;
-}
-
-.mob-folder {
-  width: 19vh;
-  height: 12vh;
-  background-size: cover;
-}
-
-.des-folder {
-  width: 23vh;
-  height: 15vh;
-  background-size:cover;
-}
-
-.mob-img {
-  width: 19vh;
-  height: 16vh;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-.des-img {
-  width: 250px;
-  height: 125px;
-  overflow: hidden;
-  align-content: center;
-}
-
-</style>
-
-<body class="{{ theme }}">
-  {% if theme == 'bw'%}
-  <div class="text-white" style="background: black;">
-  {% else %}
-  <div class="center">
-  {% endif %}
-    <nav>
-      <h1><a class="{{theme}}-t-blue xxxfont coiny logo" href="/">{{ location }}</a></h1>
-    </nav>
-  </div>
-
-
-<!-- Top container -->
-
-
+{% extends 'base.html' %}
 {% block content %}
-
+<div class="container">
+  <div class="spacer"></div>
+  <h3 class="center"><a class="text-white button" href="javascript:window.history.back();">back</a></h3>
+  <div class="spacer"></div>
+  <div class="page80 center">
+    {% if check == 'img' %}
+      {% if size == 'wide' %}
+      <img style="width:90%;" src='static/images/served/out{{query}}.jpg'>
+      {% else %}
+      <img style="height:70vh;" src='static/images/served/out{{query}}.jpg'>
+      {% endif %}
+    {% else %}
+      {% if size == 'wide' %}
+        {% if scale == 's' %}
+        <video controls width="320px"><source src="static/images/served/out{{query}}.mp4" type="video/mp4">
+        {% else %}
+        <video controls width="90%"><source src="static/images/served/out{{query}}.mp4" type="video/mp4">
+        {% endif %}
+      {% else %}
+        {% if scale == 's' %}
+        <video controls height="30vh"><source src="static/images/served/out{{query}}.mp4" type="video/mp4">
+        {% else %}
+        <video controls height="70vh"><source src="static/images/served/out{{query}}.mp4" type="video/mp4">
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  </div>
 {% endblock %}
-
-  <!-- Footer -->
-  <footer class="page80 {{theme}}-t-blue" style="border-radius: 0.5rem; padding: 20px 20px;">
-    <h4>Powered by Anarchy</h4>
-    <a class="bold">Todd McCullough</a>&nbsp;
-    <a href="https://twitter.com/tamccullough" target="_blank"><i class="{{theme}}-t-blue fa fa-twitter"></i></a>
-    <a href="https://github.com/tamccullough" target="_blank"><i class="{{theme}}-t-blue fa fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/tamccullough/" target="_blank"><i class="{{theme}}-t-blue fa fa-linkedin"></i></a>
-  </footer>
-
-  <!-- End page content -->
-</div>
-<script src="static/css/app.js"></script>
-</body>
-</html>

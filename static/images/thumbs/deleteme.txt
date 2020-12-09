@@ -1,0 +1,2 @@
+It is safe to delete this text files.
+It was created to ensure the directory it is in was created.

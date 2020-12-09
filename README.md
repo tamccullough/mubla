@@ -1,9 +1,9 @@
 ## Mubla
-### Raison d'être
+### photo album
 
 None of us should be storing our photos and videos in the cloud. Or atleast we should avoid it as much as possible.
 
-Personally, I have my files stored on an SSD(with multiple backups) so that I can access the files on any device within my home using this repository. 
+Personally, I have my files stored on an SSD(with multiple backups) so that I can access the files on any device within my home using this repository.
 
 Originally we were using some third party apps to browse our photo/video library, but I didn't fully trust what those apps may have been accessing.
 
@@ -21,7 +21,7 @@ photos/year/month/day/<filename>
   - month
     - day
       - file
-      
+
 so, for example;
 
 - photos(root)
@@ -47,21 +47,10 @@ so, for example;
         - photo1
         - photo2
         - video 1
-      
-I would recommend you organize your photos/videos in the same manner to use this flask app without problems.
 
-### Running the App
+I would recommend you organize your photos/videos in the same manner to use this flask app without problems.
 
 - clone this repository
 - change the path in the main.py file to your photos path
 - setup the virtual environment
 - use the command > flask run --host=0.0.0.0 (withrout the host argument it will only be available on the local machine)
-
-### Success
-
-If set up as detailed above, you will be able to access the files almost any browser at ipaddressofapp:5000/
-
-### Note
-
-- after every directory or file change the flask app would need to be restarted. This could be setup as a cron job on a linux box
-- ffmepg needs to be installed on the system
