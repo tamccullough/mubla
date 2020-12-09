@@ -1,4 +1,4 @@
-# Todd McCullough  June 29 2020
+# Todd McCullough
 
 from datetime import date, datetime, timedelta
 from flask import Flask
@@ -52,8 +52,14 @@ def index():
     clean_served()
     years = [x for x in directories['year'].unique() if x[0:4].isdigit()]
     years = sorted(years)
-    return render_template('index.html',
-    link = 'months', location = '',
+    if len(years) <= 2:
+        placement = 'squeeze'
+    elif len(years) <= 4:
+        placement = 'tight'
+    else:
+        placement = ''
+    return render_template('index.html', placement = placement,
+    link = 'months', location = 'mubla',
     home = 'mubla', image = 'static/images/folder.svg', folder = years,
     theme = theme,  tfont = tfont, bfont = bfont)
 
@@ -65,7 +71,13 @@ def month():
     months = [x for x in directories[directories['year'] == year]['month'].unique() if x[0] != '.']
     months = [x for x in months if (x[0] != '.') | (x[:1] != 'mt')]
     months = sorted(months)
-    return render_template('index.html',
+    if len(months) <= 2:
+        placement = 'squeeze'
+    elif len(months) <= 4:
+        placement = 'tight'
+    else:
+        placement = ''
+    return render_template('index.html', placement = placement,
     link = 'days', location = year[:-1],
     home = 'mubla', image = 'static/images/folderm.svg', folder = months,
     theme = theme,  tfont = tfont, bfont = bfont)
@@ -77,7 +89,13 @@ def day():
     days = directories[(directories['year'] == year) & (directories['month'] == month)]['day'].unique()
     days = [x for x in days if (x[0] != '.') | (x[:1] != 'mt')]
     days = sorted(days)
-    return render_template('index.html',
+    if len(days) <= 2:
+        placement = 'squeeze'
+    elif len(days) <= 4:
+        placement = 'tight'
+    else:
+        placement = ''
+    return render_template('index.html', placement = placement,
     link = 'files', location = month[:-1]+'-'+year[:-1],
     home = 'mubla', image = 'static/images/folderd.svg', folder = days,
     theme = theme,  tfont = tfont, bfont = bfont)
@@ -92,6 +110,12 @@ def file():
     files = sorted(files)
     files = [x for x in files if x != '.comments']
     print('\n',files,'\n')
+    if len(files) <= 2:
+        placement = 'squeeze'
+    elif len(files) <= 4:
+        placement = 'tight'
+    else:
+        placement = ''
     for x in files:
         if (x[-4:] == '.jpg') or (x[-4:] == '.JPG'):
             mub.image_thumb(directory+x)
@@ -100,7 +124,7 @@ def file():
                 pass
             else:
                 mub.video_thumb(directory,x)
-    return render_template('index.html',
+    return render_template('index.html', placement = placement,
     link = 'view', location = month[:-1]+'-'+day[:-1]+'-'+year[:-1],
     home = 'mubla', image = '', folder = files, path = directory,
     theme = theme,  tfont = tfont, bfont = bfont)
