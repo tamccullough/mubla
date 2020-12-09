@@ -21,12 +21,12 @@ body {
   width: 12px;
 }
 *::-webkit-scrollbar-track {
-  background: orange;
+  background: #47a3ff;
 }
 *::-webkit-scrollbar-thumb {
   background-color: inherit;
   border-radius: 20px;
-  border: 3px solid orange;
+  border: 3px solid #47a3ff;
 }
 
 /* fonts */
@@ -78,7 +78,7 @@ body {
 }
 
 .page80 {
-  width: 65%;
+  width: 80%;
   margin: 0 auto;
 }
 
