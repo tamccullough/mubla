@@ -63,4 +63,5 @@ If set up as detailed above, you will be able to access the files almost any bro
 
 ### Note
 
-after every directory or file change the flask app would need to be restarted. This could be setup as a cron job on a linux box.
+- after every directory or file change the flask app would need to be restarted. This could be setup as a cron job on a linux box
+- ffmepg needs to be installed on the system
