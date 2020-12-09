@@ -16,9 +16,8 @@ import re
 import subprocess
 #import requests
 
-root_folder = '/media/todd/photos/'
-#year = '2020'
-directory = root_folder#+year
+root_folder = '/your/photos/path/'
+directory = root_folder
 
 def get_all_files(directory):
     file_list = []
