@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Todd McCullough -->
 <html>
 <title>photo album</title>
 <meta charset="UTF-8">
@@ -24,24 +25,6 @@
 html,h1,h2 {
   font-family: '{{ tfont[0] }}', '{{ tfont[1] }}';
   font-weight: 400;
-}
-
-.input-l {
-  font-size: 2em;
-  background: none;
-  border: none;
-  width: 100px;
-  height: 50px;
-  cursor: pointer;
-}
-
-.input-s {
-  font-size: 0.75em;
-  background: none;
-  border: none;
-  width: 100px;
-  height: 50px;
-  cursor: pointer;
 }
 
 body,h3,h4,h5,a {
@@ -71,19 +54,48 @@ body,h3,h4,h5,a {
   letter-spacing: -3px;
 }
 
-.img-block {
-  display: inline;
-  position:relative;
+.input-l {
+  font-size: 4em;
+  background: none;
+  border: none;
+  width: 80%;
+  height: 80%;
+  cursor: pointer;
 }
 
-.img-title {
-  position: absolute;
-  z-index: 7;
+.input-s {
+  font-size: 2.5em;
+  background: none;
+  border: none;
+  width: 80%;
+  height: 80%;
+  cursor: pointer;
 }
 
-.img-img {
-  max-height:100%;
-  max-width:100%;
+.mob-folder {
+  width: 125px;
+  height: 70px;
+  background-size: 125px 70px;
+}
+
+.des-folder {
+  width: 200px;
+  height: 130px;
+  background-size:cover;
+}
+
+.mob-img {
+  width: 125px;
+  height: 70px;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.des-img {
+  width: 250px;
+  height: 125px;
+  overflow: hidden;
+  align-content: center;
 }
 
 </style>
