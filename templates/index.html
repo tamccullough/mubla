@@ -5,7 +5,6 @@
 <!-- app display -->
 <div class="container">
   <div class="spacer"></div>
-  <h1 class="center">{{ location }}</h1>
   {% if (link == 'days') or (link == 'files') or (link == 'view') %}
   <h3 class="center" style="width:40%;"><a class="text-white button" href="javascript:window.history.back();">back</a></h3>
   {% else %}
@@ -19,7 +18,7 @@
         <div class="parent">
           {% for item in folder %}
           {% if (link == 'months') or (link == 'days') or (link == 'files') %}
-          <div class="boxs center" style="height: 70px;">
+          <div class="boxs center" style="height: 73px;">
             <div class="center mob-folder" style="background-image: url('{{image}}');">
               <span><input class="input-s text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
             </div>
@@ -42,33 +41,39 @@
         </div>
       </form>
     </div>
-    <div class="desktop" style="min-height:70vh;">
-      <form method="post" action="/{{ link }}">
-        <div class="parent">
-          {% for item in folder %}
-          {% if (link == 'months') or (link == 'days') or (link == 'files') %}
-          <div class="box center" style="height: 135px;">
-            <div class="center des-folder" style="background-image: url('{{image}}');">
-              <span><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
-            </div>
-          </div>
-          {% else %}
-          <div class="box center">
-            <div>
-              <div>
-                <form action="index.html" method="post">
-                  <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
-                  <div class="borderc center des-img">
-                    <input style="width: 100%;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+    {% if placement == 'squeeze'%}
+    <div class="desktop center" style="min-height:70vh; width: 40%;">
+      {% elif placement == 'tight'%}
+      <div class="desktop center" style="min-height:70vh; width: 70%;">
+        {% else %}
+        <div class="desktop" style="min-height:70vh;">
           {% endif %}
-          {% endfor%}
+          <form method="post" action="/{{ link }}">
+            <div class="parent">
+              {% for item in folder %}
+              {% if (link == 'months') or (link == 'days') or (link == 'files') %}
+              <div class="box center" style="height: 15vh;">
+                <div class="center des-folder" style="background-image: url('{{image}}');">
+                  <span><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
+                </div>
+              </div>
+              {% else %}
+              <div class="box center">
+                <div>
+                  <div>
+                    <form action="index.html" method="post">
+                      <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
+                      <div class="borderc center des-img">
+                        <input style="width: 100%;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor%}
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  </div>
-  {% endblock %}
+      </div>
+      {% endblock %}
