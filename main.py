@@ -1,4 +1,4 @@
-# Todd McCullough
+# Todd McCullough  2020
 
 from datetime import date, datetime, timedelta
 from flask import Flask
@@ -18,7 +18,7 @@ from os.path import isfile, join
 import pandas as pd
 import re
 
-root_folder = '/your/photos/path/'
+root_folder = '/media/todd/photos/'
 directory = root_folder
 
 def clean_thumbs():
