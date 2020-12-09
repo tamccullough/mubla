@@ -9,6 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 import mubla as mub
 
+#import db
 import functools
 import numpy as np
 import os
@@ -17,7 +18,7 @@ from os.path import isfile, join
 import pandas as pd
 import re
 
-root_folder = '/media/todd/photos'
+root_folder = '/your/photos/path/'
 directory = root_folder
 
 def clean_thumbs():
@@ -53,7 +54,7 @@ def index():
     years = sorted(years)
     return render_template('index.html',
     link = 'months', location = '',
-    home = 'mubla', ext = '.jpg', folder = years,
+    home = 'mubla', image = 'static/images/folder.svg', folder = years,
     theme = theme,  tfont = tfont, bfont = bfont)
 
 @mubla.route('/months', methods=['POST'])
@@ -66,7 +67,7 @@ def month():
     months = sorted(months)
     return render_template('index.html',
     link = 'days', location = year[:-1],
-    home = 'mubla', ext = '.jpg', folder = months,
+    home = 'mubla', image = 'static/images/folderm.svg', folder = months,
     theme = theme,  tfont = tfont, bfont = bfont)
 
 @mubla.route('/days', methods=['POST'])
@@ -78,7 +79,7 @@ def day():
     days = sorted(days)
     return render_template('index.html',
     link = 'files', location = month[:-1]+'-'+year[:-1],
-    home = 'mubla', ext = '.jpg', folder = days,
+    home = 'mubla', image = 'static/images/folderd.svg', folder = days,
     theme = theme,  tfont = tfont, bfont = bfont)
 
 @mubla.route('/files', methods=['POST'])
@@ -101,7 +102,7 @@ def file():
                 mub.video_thumb(directory,x)
     return render_template('index.html',
     link = 'view', location = month[:-1]+'-'+day[:-1]+'-'+year[:-1],
-    home = 'mubla', ext = '.jpg', folder = files, path = directory,
+    home = 'mubla', image = '', folder = files, path = directory,
     theme = theme,  tfont = tfont, bfont = bfont)
 
 @mubla.route('/view', methods=['POST'])
@@ -119,7 +120,7 @@ def view():
         print('\n',gen,'\n',size,'\n')
         image_scaled = mub.image_resize(img,value=3,scale=0)
         image_scaled.save(f'static/images/served/out{gen}.jpg',quality=100)
-        return render_template('file.html',
+        return render_template('file.html', scale = 'l',
         link = 'months', location = month[:-1]+'-'+day[:-1]+'-'+year[:-1], check = 'img', query = gen,
         home = 'mubla', ext = '.jpg', folder = years, size = size,
         theme = theme,  tfont = tfont, bfont = bfont)
@@ -127,7 +128,12 @@ def view():
         #return send_file('static/images/served/out.jpg', cache_timeout=0)
     else:
         mub.video_copy(directory+filename,gen)
-        return render_template('file.html',
+        if int(year[:-1]) < 2010:
+            scale = 's'
+        else:
+            scale = 'l'
+        print('\n',scale,'\n')
+        return render_template('file.html', scale = scale,
         link = 'months', location = month[:-1]+'-'+day[:-1]+'-'+year[:-1], check = 'video', query = gen,
         home = 'mubla', ext = '.jpg', folder = years, size = 'wide',
         theme = theme,  tfont = tfont, bfont = bfont)
