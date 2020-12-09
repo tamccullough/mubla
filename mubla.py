@@ -159,4 +159,4 @@ def video_thumb(directory,filename):
     subprocess.call(['ffmpeg', '-i', directory+filename, '-ss', '00:00:00.000', '-vframes', '1', img_output_path])
 
 def video_copy(filename,gen):
-    copyfile(filename, os.path.join(f'/home/todd/Documents/git/mubla/static/images/served/out{gen}.mp4'))
+    copyfile(filename, os.path.join(f'static/images/served/out{gen}.mp4'))
