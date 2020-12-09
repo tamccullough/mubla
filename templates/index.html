@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- Todd McCullough -->
 <!-- !PAGE CONTENT! -->
 <!-- app display -->
 <div class="container">
@@ -18,16 +19,9 @@
         <div class="parent">
           {% for item in folder %}
           {% if (link == 'months') or (link == 'days') or (link == 'files') %}
-          <div class="boxs center">
-            <div class="img-block">
-              <span class="img-title"><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
-              {% if link == 'months' %}
-              <img class="img-img" src="static/images/folder.svg" />
-              {% elif link == 'days' %}
-              <img class="img-img" src="static/images/folderm.svg" />
-              {% elif link == 'files' %}
-              <img class="img-img" src="static/images/folderd.svg" />
-              {% endif %}
+          <div class="boxs center" style="height: 70px;">
+            <div class="center mob-folder" style="background-image: url('{{image}}');">
+              <span><input class="input-s text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
             </div>
           </div>
           {% else %}
@@ -36,8 +30,8 @@
               <div>
                 <form class="" action="index.html" method="post">
                   <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
-                  <div class="borderh center" style="background: red; width: 28vw; height: 12vh; overflow: hidden;vertical-align: middle;">
-                    <input style="width: 45vw; max-width: 45vw; object-fit: cover;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
+                  <div class="borderh center mob-img">
+                    <input style="width: 100%; object-fit: cover;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
                   </div>
                 </form>
               </div>
@@ -53,26 +47,19 @@
         <div class="parent">
           {% for item in folder %}
           {% if (link == 'months') or (link == 'days') or (link == 'files') %}
-          <div class="box center">
-            <div class="img-block">
-              <span class="img-title"><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
-              {% if link == 'months' %}
-              <img style="max-width: 200px;" class="img-img" src="static/images/folder.svg" />
-              {% elif link == 'days' %}
-              <img style="max-width: 200px;" class="img-img" src="static/images/folderm.svg" />
-              {% elif link == 'files' %}
-              <img style="max-width: 200px;" class="img-img" src="static/images/folderd.svg" />
-              {% endif %}
+          <div class="box center" style="height: 135px;">
+            <div class="center des-folder" style="background-image: url('{{image}}');">
+              <span><input class="input-l text-white cursive" type="submit" id="{{link}}" name="{{link}}" value="{{ item[:-1] }}"></span>
             </div>
           </div>
           {% else %}
           <div class="box center">
             <div>
               <div>
-                <form class="" action="index.html" method="post">
+                <form action="index.html" method="post">
                   <input style="display: none;" type="text" id="file" name="file" value="{{ item }}" >
-                  <div class="borderc center" style="background: red; width: 15vw; height:15vh; overflow: hidden; align-content: center;">
-                    <input style="width: 20vw; object-fit: cover;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
+                  <div class="borderc center des-img">
+                    <input style="width: 100%;"  type="image" formaction="/{{ link }}" src="static/images/thumbs/thumb-{{item[:-3]}}jpg">
                   </div>
                 </form>
               </div>
