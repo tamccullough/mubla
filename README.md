@@ -46,4 +46,7 @@ photos/year/month/day/<filename>
 ## Recommendations
 
 Organize your photos/videos in the same manner to use this flask app without problems.
-If you so choose to make the directory structure different, you will then need to edit the main.py
+ 
+Take the time to set it up correctly. These are your memories afterall.
+
+If you choose to make the directory structure different, you will then need to edit the main.py file.
